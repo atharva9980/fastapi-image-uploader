@@ -3,22 +3,12 @@
   "builds": [
     {
       "src": "api/upload_service.py",
-      "use": "@vercel/fastapi"
-
+      "use": "@vercel/python"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "api/upload_service.py"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/uploader.html"
-    }
+    { "src": "/api/(.*)", "dest": "api/upload_service.py" },
+    { "src": "/static/(.*)", "dest": "/static/$1" },
+    { "src": "/(.*)", "dest": "/uploader.html" }
   ]
 }
