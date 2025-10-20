@@ -3,7 +3,8 @@
   "builds": [
     {
       "src": "api/upload_service.py",
-      "use": "@vercel/python"
+      "use": "@vercel/fastapi"
+
     }
   ],
   "routes": [
