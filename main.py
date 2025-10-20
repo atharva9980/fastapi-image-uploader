@@ -4,6 +4,8 @@ import cloudinary
 import cloudinary.uploader
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles  # <-- NEW: Import StaticFiles
+from fastapi.responses import FileResponse   # <-- NEW: Import FileResponse
 
 load_dotenv()
 
@@ -32,7 +34,7 @@ cloudinary.config(
   secure = True
 )
 
-# --- THE ONLY ENDPOINT ---
+# --- THE API ENDPOINT ---
 @app.post("/api/upload-image")
 async def create_upload_file(file: UploadFile = File(...)):
     try:
@@ -46,3 +48,13 @@ async def create_upload_file(file: UploadFile = File(...)):
         return {"file_url": secure_url}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Image upload failed: {str(e)}")
+
+# --- NEW: SERVE STATIC FILES AND THE ROOT HTML ---
+
+# Mount the 'static' directory to the '/static' path
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Serve the uploader.html file at the root path
+@app.get("/")
+async def read_root():
+    return FileResponse('uploader.html')

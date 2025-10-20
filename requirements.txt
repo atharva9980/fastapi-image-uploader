@@ -1,5 +1,5 @@
 fastapi
-uvicorn
-python-multipart
-cloudinary
+uvicorn[standard]
 python-dotenv
+cloudinary
+python-multipart
