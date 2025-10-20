@@ -7,7 +7,7 @@ const copyButton = document.getElementById('copyButton');
 
 // The URL of your FastAPI upload service
 // This relative path will point to your Vercel domain's API endpoint
-const UPLOAD_URL = '/upload-image/';
+const UPLOAD_URL = '/api/upload-image'; // <-- Use the new path
 
 // Listen for when the user selects a file
 fileInput.addEventListener('change', handleFileUpload);
